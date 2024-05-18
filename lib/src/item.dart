@@ -25,7 +25,16 @@ class Item {
         ),
         taxes = <Tax>[] {
     if (taxes != null) {
-      taxes.sort((tax1, tax2) => tax1.priority.compareTo(tax2.priority));
+      taxes.sort((tax1, tax2) {
+        final byPriority = tax1.priority.compareTo(tax2.priority);
+        if (byPriority != 0) {
+          return byPriority;
+        }
+        if (tax1.affectTax == tax2.affectTax) {
+          return 0;
+        }
+        return tax1.affectTax ? -1 : 1;
+      });
       this.taxes.addAll(taxes);
     }
   }
@@ -41,6 +50,14 @@ class Item {
     baseTotal -= discount!.discountOf(baseTotal);
     final inverse = _inverseSubtotalOf(baseTotal);
     return _subtotalOf(inverse / quantity);
+  }
+
+  double get tax {
+    return _taxAmountOf(subtotal);
+  }
+
+  double get total {
+    return subtotal + tax;
   }
 
   /// Calculates subtotal amount of given [price] including [discount] (excluding taxes).
