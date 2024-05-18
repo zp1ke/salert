@@ -25,4 +25,12 @@ class Tax {
     }
     return unitValue;
   }
+
+  /// Calculates subtotal for given [total].
+  double inverseSubtotalOf(double total) {
+    if (isPercentage) {
+      return total / (1 + unitValue);
+    }
+    return total - unitValue;
+  }
 }
