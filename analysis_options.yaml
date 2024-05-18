@@ -1,0 +1,9 @@
+# https://dart.dev/go/core-lints
+# https://dart.dev/guides/language/analysis-options
+include: package:lints/recommended.yaml
+# linter:
+#   rules:
+#     - camel_case_types
+# analyzer:
+#   exclude:
+#     - path/to/excluded/files/**
