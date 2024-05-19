@@ -1,8 +1,9 @@
 import 'discount.dart';
+import 'sellable.dart';
 import 'tax.dart';
 
 /// Represents a sale item (product or service).
-class Item {
+class Item implements Sellable {
   final String code;
   final double quantity;
   final double unitPrice;
@@ -39,7 +40,8 @@ class Item {
     }
   }
 
-  /// Calculates subtotal amount including [discount] (excluding taxes).
+  /// Calculates subtotal amount including [discount] (before taxes).
+  @override
   double get subtotal {
     if (discount == null || discount!.affectTax) {
       return _subtotalOf(unitPrice, discount);
@@ -52,7 +54,8 @@ class Item {
     return _subtotalOf(inverse / quantity);
   }
 
-  /// Calculates subtotal amount including [discount] for given [taxCode] (excluding taxes).
+  /// Calculates subtotal amount including [discount] for given [taxCode] (before taxes).
+  @override
   double subtotalOf(String taxCode) {
     var value = _subtotalOf(unitPrice, discount);
     var found = false;
@@ -72,11 +75,13 @@ class Item {
     return 0;
   }
 
+  @override
   double get tax {
     return _taxAmountOf(subtotal);
   }
 
   /// Calculates tax amount including [discount] for given [taxCode].
+  @override
   double taxOf(String taxCode) {
     var subtotal = _subtotalOf(unitPrice, discount);
     for (final tax in taxes) {
@@ -91,11 +96,19 @@ class Item {
     return 0;
   }
 
+  // Calculates discount amount before taxes.
+  @override
+  double get discountAmount {
+    var baseSubtotal = _subtotalOf(unitPrice);
+    return baseSubtotal - subtotal;
+  }
+
+  @override
   double get total {
     return subtotal + tax;
   }
 
-  /// Calculates subtotal amount of given [price] including [discount] (excluding taxes).
+  /// Calculates subtotal amount of given [price] including [discount] (before taxes).
   double _subtotalOf(double price, [Discount? discount]) {
     final theDiscount = discount ?? Discount.empty();
     if (theDiscount.isUnitary) {

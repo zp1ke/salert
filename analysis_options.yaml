@@ -11,5 +11,6 @@ linter:
     - always_declare_return_types
     - annotate_overrides
     - cancel_subscriptions
+    - directives_ordering
     - prefer_single_quotes
     - require_trailing_commas

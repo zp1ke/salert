@@ -9,7 +9,10 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"Dart-Code.dart-code"
+				"DavidAnson.vscode-markdownlint",
+				"Dart-Code.dart-code",
+				"EditorConfig.EditorConfig",
+				"redhat.vscode-yaml"
 			]
 		}
 	},

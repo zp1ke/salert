@@ -14,19 +14,36 @@ void ecuadorSriExample() {
     code: 'productX',
     quantity: 2,
     unitPrice: 10,
+    discount: Discount(amount: 1),
     taxes: [ice, vat],
   );
+  // Calculate item values.
+  printSellable(item, 'Item values:', [ice.code, vat.code]);
   // The sale (aka Invoice)
   final sale = Sale(items: [item], tip: 1);
-  // Calculate some values.
-  print('Sale values:');
-  print('   Subtotal iceX  ${sale.subtotalOf(ice.code).toMoneyString}');
-  print('  Subtotal IVA13  ${sale.subtotalOf(vat.code).toMoneyString}');
-  print('        SUBTOTAL  ${sale.subtotal.toMoneyString}');
-  print('        Tax iceX  ${sale.taxOf(ice.code).toMoneyString}');
-  print('       Tax IVA13  ${sale.taxOf(vat.code).toMoneyString}');
-  print('             TAX  ${sale.tax.toMoneyString}');
-  print('           TOTAL  ${sale.total.toMoneyString}');
+  // Calculate sale values.
+  printSellable(sale, 'Sale values:', [ice.code, vat.code]);
+}
+
+void printSellable(Sellable sellable, String title, List<String> taxCodes) {
+  print(title);
+  final pad = 30;
+  for (String taxCode in taxCodes) {
+    print(
+      'Subtotal $taxCode  ${sellable.subtotalOf(taxCode).toMoneyString}'
+          .padLeft(pad),
+    );
+  }
+  print('SUBTOTAL  ${sellable.subtotal.toMoneyString}'.padLeft(pad));
+  for (String taxCode in taxCodes) {
+    print(
+      'Tax $taxCode  ${sellable.taxOf(taxCode).toMoneyString}'.padLeft(pad),
+    );
+  }
+  print('DISCOUNT  ${sellable.discountAmount.toMoneyString}'.padLeft(pad));
+  print('TAX  ${sellable.tax.toMoneyString}'.padLeft(pad));
+  print('TOTAL  ${sellable.total.toMoneyString}'.padLeft(pad));
+  print('-------------------');
 }
 
 extension NumberExtension on double {
