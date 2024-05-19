@@ -28,14 +28,14 @@ void ecuadorSriExample() {
 void printSellable(Sellable sellable, String title, List<String> taxCodes) {
   print(title);
   final pad = 30;
-  for (String taxCode in taxCodes) {
+  for (final taxCode in taxCodes) {
     print(
       'Subtotal $taxCode  ${sellable.subtotalOf(taxCode).toMoneyString}'
           .padLeft(pad),
     );
   }
   print('SUBTOTAL  ${sellable.subtotal.toMoneyString}'.padLeft(pad));
-  for (String taxCode in taxCodes) {
+  for (final taxCode in taxCodes) {
     print(
       'Tax $taxCode  ${sellable.taxOf(taxCode).toMoneyString}'.padLeft(pad),
     );

@@ -82,5 +82,40 @@ void main() {
       expect(sale.taxOf('tax1'), closeTo(3.15, 0.01));
       expect(sale.taxOf('tax2'), 1.5);
     });
+
+    test('Discount calculation', () {
+      // No discount
+      var item = Item(code: 'item1', quantity: 2, unitPrice: 10);
+      var sale = Sale(items: [item]);
+      expect(sale.discountAmount, 0);
+
+      // With one(1) item having one(1) tax affecting total value.
+      var tax = Tax(code: 'tax1', unitValue: 10);
+      item = Item(code: 'item1', quantity: 2, unitPrice: 10, taxes: [tax]);
+      final discount = Discount(amount: 1, affectTax: false);
+      sale = Sale(items: [item], discount: discount);
+      expect(sale.discountAmount, closeTo(0.909, 0.01));
+
+      // With one(1) item having two(2) taxes affecting total value.
+      var tax2 = Tax(code: 'tax2', unitValue: 5, affectTax: true);
+      item = Item(
+        code: 'item1',
+        quantity: 2,
+        unitPrice: 10,
+        taxes: [tax, tax2],
+      );
+      sale = Sale(items: [item], discount: discount);
+      expect(sale.discountAmount, closeTo(0.8658, 0.01));
+
+      // With two(2) items having two(2) taxes affecting total value.
+      var item2 = Item(
+        code: 'item2',
+        quantity: 1,
+        unitPrice: 10,
+        taxes: [tax, tax2],
+      );
+      sale = Sale(items: [item, item2], discount: discount);
+      expect(sale.discountAmount, closeTo(1.2987, 0.01));
+    });
   });
 }

@@ -142,4 +142,22 @@ class Item implements Sellable {
     }
     return subtotal;
   }
+
+  /// Creates a copy with new [discount].
+  Item copyWith({required Discount? discount}) {
+    return Item(
+      code: code,
+      quantity: quantity,
+      unitPrice: unitPrice,
+      discount: discount,
+      taxes: taxes,
+    );
+  }
+
+  /// Adds given [addDiscount] to [discount].
+  ///
+  /// @return pair with:
+  /// first parameter is result discount with the sum of [addDiscount] and [discount].
+  /// second parameter is value of [addDiscount] that didn't fit for this item.
+  Pair<Discount, Discount?> discountAdding(Discount addDiscount) {}
 }
