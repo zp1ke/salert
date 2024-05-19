@@ -52,8 +52,43 @@ class Item {
     return _subtotalOf(inverse / quantity);
   }
 
+  /// Calculates subtotal amount including [discount] for given [taxCode] (excluding taxes).
+  double subtotalOf(String taxCode) {
+    var value = _subtotalOf(unitPrice, discount);
+    var found = false;
+    for (final tax in taxes) {
+      if (tax.code == taxCode) {
+        found = true;
+        break;
+      }
+      final taxAmount = tax.taxOf(value);
+      if (tax.affectTax) {
+        value += taxAmount;
+      }
+    }
+    if (found) {
+      return value;
+    }
+    return 0;
+  }
+
   double get tax {
     return _taxAmountOf(subtotal);
+  }
+
+  /// Calculates tax amount including [discount] for given [taxCode].
+  double taxOf(String taxCode) {
+    var subtotal = _subtotalOf(unitPrice, discount);
+    for (final tax in taxes) {
+      final taxAmount = tax.taxOf(subtotal);
+      if (tax.code == taxCode) {
+        return taxAmount;
+      }
+      if (tax.affectTax) {
+        subtotal += taxAmount;
+      }
+    }
+    return 0;
   }
 
   double get total {

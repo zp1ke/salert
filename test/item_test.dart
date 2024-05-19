@@ -54,7 +54,7 @@ void main() {
 
       // unit discount not affecting tax with one(1) tax
       discount = Discount(amount: 1, affectTax: false);
-      var tax = Tax(code: 'test', unitValue: 10);
+      var tax = Tax(code: 'tax1', unitValue: 10);
       item = Item(
         code: 'test',
         quantity: 1,
@@ -69,7 +69,7 @@ void main() {
 
       // unit discount not affecting tax with two(2) taxes
       discount = Discount(amount: 1, affectTax: false);
-      var tax2 = Tax(code: 'test', unitValue: 5, affectTax: true);
+      var tax2 = Tax(code: 'tax2', unitValue: 5, affectTax: true);
       item = Item(
         code: 'test',
         quantity: 1,
@@ -96,7 +96,7 @@ void main() {
 
       // unit discount not affecting tax with one(1) tax
       var discount = Discount(amount: 1, affectTax: false);
-      var tax = Tax(code: 'test', unitValue: 10);
+      var tax = Tax(code: 'tax1', unitValue: 10);
       item = Item(
         code: 'test',
         quantity: 1,
@@ -112,7 +112,7 @@ void main() {
 
       // unit discount not affecting tax with two(2) taxes
       discount = Discount(amount: 1, affectTax: false);
-      var tax2 = Tax(code: 'test', unitValue: 5, affectTax: true);
+      var tax2 = Tax(code: 'tax2', unitValue: 5, affectTax: true);
       item = Item(
         code: 'test',
         quantity: 1,
