@@ -12,6 +12,7 @@ Library for sales data calculations.
 ## Usage
 
 Example for SRI invoice (Ecuador):
+
 ```dart
 // VAT tax with 13%.
 final vat = Tax(code: 'IVA13', unitValue: 13);
