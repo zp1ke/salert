@@ -33,4 +33,15 @@ class Tax {
     }
     return total - unitValue;
   }
+
+  static Comparator<Tax> get comparator => (Tax tax1, Tax tax2) {
+        final byPriority = tax1.priority.compareTo(tax2.priority);
+        if (byPriority != 0) {
+          return byPriority;
+        }
+        if (tax1.affectTax == tax2.affectTax) {
+          return 0;
+        }
+        return tax1.affectTax ? -1 : 1;
+      };
 }

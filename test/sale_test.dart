@@ -92,7 +92,7 @@ void main() {
       // With one(1) item having one(1) tax affecting total value.
       var tax = Tax(code: 'tax1', unitValue: 10);
       item = Item(code: 'item1', quantity: 2, unitPrice: 10, taxes: [tax]);
-      final discount = Discount(amount: 1, affectTax: false);
+      var discount = Discount(amount: 1, affectTax: false);
       sale = Sale(items: [item], discount: discount);
       expect(sale.discountAmount, closeTo(0.909, 0.01));
 
@@ -115,7 +115,18 @@ void main() {
         taxes: [tax, tax2],
       );
       sale = Sale(items: [item, item2], discount: discount);
-      expect(sale.discountAmount, closeTo(1.2987, 0.01));
+      expect(sale.discountAmount, closeTo(0.8658, 0.01));
+
+      // With one(1) item having one(1) tax and discount; affecting total value.
+      final item3 = Item(
+        code: 'item3',
+        quantity: 1,
+        unitPrice: 10,
+        taxes: [tax],
+        discount: Discount(amount: 1),
+      );
+      sale = Sale(items: [item3], discount: discount);
+      expect(sale.discountAmount, closeTo(1.909, 0.01));
     });
   });
 }

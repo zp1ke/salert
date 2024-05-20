@@ -26,16 +26,7 @@ class Item implements Sellable {
         ),
         taxes = <Tax>[] {
     if (taxes != null) {
-      taxes.sort((tax1, tax2) {
-        final byPriority = tax1.priority.compareTo(tax2.priority);
-        if (byPriority != 0) {
-          return byPriority;
-        }
-        if (tax1.affectTax == tax2.affectTax) {
-          return 0;
-        }
-        return tax1.affectTax ? -1 : 1;
-      });
+      taxes.sort(Tax.comparator);
       this.taxes.addAll(taxes);
     }
   }
@@ -153,11 +144,4 @@ class Item implements Sellable {
       taxes: taxes,
     );
   }
-
-  /// Adds given [addDiscount] to [discount].
-  ///
-  /// @return pair with:
-  /// first parameter is result discount with the sum of [addDiscount] and [discount].
-  /// second parameter is value of [addDiscount] that didn't fit for this item.
-  Pair<Discount, Discount?> discountAdding(Discount addDiscount) {}
 }
