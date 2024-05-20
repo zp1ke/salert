@@ -1,9 +1,6 @@
-<!--
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
--->
-
 # Salert
+
+[![Test](https://github.com/h4j4x/salert/actions/workflows/test.yml/badge.svg)](https://github.com/h4j4x/salert/actions/workflows/test.yml)
 
 Library for sales data calculations.
 
