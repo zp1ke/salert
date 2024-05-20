@@ -66,6 +66,7 @@ class Item implements Sellable {
     return 0;
   }
 
+  /// Calculates tax amount.
   @override
   double get tax {
     return _taxAmountOf(subtotal);
@@ -94,6 +95,7 @@ class Item implements Sellable {
     return baseSubtotal - subtotal;
   }
 
+  /// Calculates total amount.
   @override
   double get total {
     return subtotal + tax;

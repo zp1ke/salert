@@ -9,7 +9,7 @@ void ecuadorSriExample() {
   final ice = Tax(code: 'iceX', unitValue: 15, affectTax: true);
   // VAT tax with 13%.
   final vat = Tax(code: 'IVA13', unitValue: 13);
-  // Some item (product / service).
+  // Some item (product or service).
   final item = Item(
     code: 'productX',
     quantity: 2,

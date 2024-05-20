@@ -3,28 +3,27 @@
 [creating packages](https://dart.dev/guides/libraries/create-library-packages)
 -->
 
-Library for sales calculations.
+# Salert
+
+Library for sales data calculations.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+- Sales items calculations (discount, subtotal, taxes, total).
+- Sales calculations (discount, subtotal, taxes, total).
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
+Example for SRI invoice (Ecuador):
 ```dart
-const like = 'sample';
+// VAT tax with 13%.
+final vat = Tax(code: 'IVA13', unitValue: 13);
+// Invoice item (product or service).
+final item = Item(code: 'productX', quantity: 1, unitPrice: 10, taxes: [vat]);
+// The sale (aka Invoice)
+final sale = Sale(items: [item], tip: 1);
+// Calculate sale values.
+print('SUBTOTAL  ${sale.subtotal}');
+print('TAX  ${sale.tax}');
+print('TOTAL  ${sale.total}');
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.

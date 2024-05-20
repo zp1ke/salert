@@ -29,7 +29,7 @@ class Sale implements Sellable {
         .reduce((s1, s2) => s1 + s2);
   }
 
-  /// Calculates tax amount including [discount].
+  /// Calculates tax amount.
   @override
   double get tax {
     return _items.map((item) => item.tax).reduce((s1, s2) => s1 + s2);
@@ -51,9 +51,10 @@ class Sale implements Sellable {
         .reduce((s1, s2) => s1 + s2);
   }
 
+  /// Calculates total amount.
   @override
   double get total {
-    return subtotal + tax;
+    return subtotal + tax + tip;
   }
 
   List<Item> get _items {
@@ -81,7 +82,7 @@ class Sale implements Sellable {
       final baseSubtotal =
           items.map((item) => item.subtotal).reduce((s1, s2) => s1 + s2);
       final baseTax = items.map((item) => item.tax).reduce((s1, s2) => s1 + s2);
-      final baseTotal = baseSubtotal + baseTax;
+      final baseTotal = baseSubtotal + baseTax + tip;
       var discountValue = discount!.discountOf(baseTotal);
       final discountedSubtotal = _inverseSubtotalOf(baseTotal - discountValue);
       discountValue = baseSubtotal - discountedSubtotal;
