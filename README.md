@@ -2,7 +2,7 @@
 
 [![Test](https://github.com/h4j4x/salert/actions/workflows/test.yml/badge.svg)](https://github.com/h4j4x/salert/actions/workflows/test.yml)
 
-Library for sales data calculations.
+A library for efficient sales amounts calculations, including discounts, subtotal before taxes, taxes and total amounts.
 
 ## Features
 

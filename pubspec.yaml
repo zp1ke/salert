@@ -6,8 +6,6 @@ repository: https://github.com/h4j4x/salert
 environment:
   sdk: ^3.4.0
 
-dependencies:
-
 dev_dependencies:
   lints: ^4.0.0
   test: any

@@ -4,10 +4,13 @@ import 'dart:math';
 class Discount {
   /// Amount for calculations.
   final double amount;
+
   /// Unitary applies calculation for every item.
   final bool isUnitary;
+
   /// If amount represents a percentage.
   final bool isPercentage;
+
   /// True if applies before taxes.
   final bool affectTax;
 
