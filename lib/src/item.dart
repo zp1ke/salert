@@ -34,7 +34,7 @@ class Item implements Sellable {
   /// Calculates subtotal amount including [discount] (before taxes).
   @override
   double get subtotal {
-    if (discount == null || discount!.affectTax) {
+    if (discount == null || discount!.affectSubtotalBeforeTaxes) {
       return _subtotalOf(unitPrice, discount);
     }
     final base = _subtotalOf(unitPrice);
@@ -56,7 +56,7 @@ class Item implements Sellable {
         break;
       }
       final taxAmount = tax.taxOf(value);
-      if (tax.affectTax) {
+      if (tax.affectNextTaxSubtotal) {
         value += taxAmount;
       }
     }
@@ -81,7 +81,7 @@ class Item implements Sellable {
       if (tax.code == taxCode) {
         return taxAmount;
       }
-      if (tax.affectTax) {
+      if (tax.affectNextTaxSubtotal) {
         subtotal += taxAmount;
       }
     }
@@ -120,7 +120,7 @@ class Item implements Sellable {
     for (final tax in taxes) {
       final taxAmount = tax.taxOf(subtotal);
       value += taxAmount;
-      if (tax.affectTax) {
+      if (tax.affectNextTaxSubtotal) {
         subtotal += taxAmount;
       }
     }

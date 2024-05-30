@@ -12,6 +12,7 @@
 				"DavidAnson.vscode-markdownlint",
 				"Dart-Code.dart-code",
 				"EditorConfig.EditorConfig",
+        "GitHub.vscode-github-actions",
 				"redhat.vscode-yaml"
 			]
 		}

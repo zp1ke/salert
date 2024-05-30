@@ -78,7 +78,7 @@ class Sale implements Sellable {
   }
 
   Discount? get _discount {
-    if (discount != null && !discount!.affectTax) {
+    if (discount != null && !discount!.affectSubtotalBeforeTaxes) {
       final baseSubtotal =
           items.map((item) => item.subtotal).reduce((s1, s2) => s1 + s2);
       final baseTax = items.map((item) => item.tax).reduce((s1, s2) => s1 + s2);

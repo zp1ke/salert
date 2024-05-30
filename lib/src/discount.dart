@@ -12,13 +12,13 @@ class Discount {
   final bool isPercentage;
 
   /// True if applies before taxes.
-  final bool affectTax;
+  final bool affectSubtotalBeforeTaxes;
 
   Discount({
     required double amount,
     this.isUnitary = true,
     this.isPercentage = false,
-    this.affectTax = true,
+    this.affectSubtotalBeforeTaxes = true,
   })  : assert(amount >= 0, 'Amount must be zero or positive.'),
         amount = !isPercentage || amount <= 1 ? amount : amount / 100;
 

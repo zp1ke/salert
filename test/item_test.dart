@@ -53,7 +53,7 @@ void main() {
       expect(item.subtotal, equals(18));
 
       // unit discount not affecting tax with one(1) tax
-      discount = Discount(amount: 1, affectTax: false);
+      discount = Discount(amount: 1, affectSubtotalBeforeTaxes: false);
       var tax = Tax(code: 'tax1', unitValue: 10);
       item = Item(
         code: 'test',
@@ -68,8 +68,8 @@ void main() {
       expect(item.subtotal, closeTo(9.09, 0.01));
 
       // unit discount not affecting tax with two(2) taxes
-      discount = Discount(amount: 1, affectTax: false);
-      var tax2 = Tax(code: 'tax2', unitValue: 5, affectTax: true);
+      discount = Discount(amount: 1, affectSubtotalBeforeTaxes: false);
+      var tax2 = Tax(code: 'tax2', unitValue: 5, affectNextTaxSubtotal: true);
       item = Item(
         code: 'test',
         quantity: 1,
@@ -95,7 +95,7 @@ void main() {
       expect(item.tax, equals(0));
 
       // unit discount not affecting tax with one(1) tax
-      var discount = Discount(amount: 1, affectTax: false);
+      var discount = Discount(amount: 1, affectSubtotalBeforeTaxes: false);
       var tax = Tax(code: 'tax1', unitValue: 10);
       item = Item(
         code: 'test',
@@ -111,8 +111,8 @@ void main() {
       expect(item.tax, closeTo(0.909, 0.01));
 
       // unit discount not affecting tax with two(2) taxes
-      discount = Discount(amount: 1, affectTax: false);
-      var tax2 = Tax(code: 'tax2', unitValue: 5, affectTax: true);
+      discount = Discount(amount: 1, affectSubtotalBeforeTaxes: false);
+      var tax2 = Tax(code: 'tax2', unitValue: 5, affectNextTaxSubtotal: true);
       item = Item(
         code: 'test',
         quantity: 1,
@@ -142,7 +142,7 @@ void main() {
       expect(item.discountAmount, equals(0));
 
       // unit discount not affecting tax with one(1) tax
-      var discount = Discount(amount: 1, affectTax: false);
+      var discount = Discount(amount: 1, affectSubtotalBeforeTaxes: false);
       var tax = Tax(code: 'tax1', unitValue: 10);
       item = Item(
         code: 'test',
@@ -158,8 +158,8 @@ void main() {
       expect(item.discountAmount, closeTo(0.909, 0.01));
 
       // unit discount not affecting tax with two(2) taxes
-      discount = Discount(amount: 1, affectTax: false);
-      var tax2 = Tax(code: 'tax2', unitValue: 5, affectTax: true);
+      discount = Discount(amount: 1, affectSubtotalBeforeTaxes: false);
+      var tax2 = Tax(code: 'tax2', unitValue: 5, affectNextTaxSubtotal: true);
       item = Item(
         code: 'test',
         quantity: 1,

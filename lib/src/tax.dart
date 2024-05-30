@@ -2,14 +2,14 @@ class Tax {
   final String code;
   final double unitValue;
   final bool isPercentage;
-  final bool affectTax;
+  final bool affectNextTaxSubtotal;
   final int priority;
 
   Tax({
     required this.code,
     required double unitValue,
     this.isPercentage = true,
-    this.affectTax = false,
+    this.affectNextTaxSubtotal = false,
     this.priority = 1,
   })  : assert(
           unitValue >= 0,
@@ -39,9 +39,9 @@ class Tax {
         if (byPriority != 0) {
           return byPriority;
         }
-        if (tax1.affectTax == tax2.affectTax) {
+        if (tax1.affectNextTaxSubtotal == tax2.affectNextTaxSubtotal) {
           return 0;
         }
-        return tax1.affectTax ? -1 : 1;
+        return tax1.affectNextTaxSubtotal ? -1 : 1;
       };
 }

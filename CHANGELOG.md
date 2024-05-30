@@ -5,6 +5,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.2]
+
+### Changed
+
+- Discount property *affectTax* renamed to *affectSubtotalBeforeTaxes* to clarify purpose.
+- Tax property *affectTax* renamed to *affectNextTaxSubtotal* to clarify purpose.
+
 ## [0.0.1]
 
 ### Added

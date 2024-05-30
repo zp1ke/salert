@@ -18,7 +18,7 @@ void main() {
       expect(sale.subtotalOf('tax1'), 20);
 
       // With one(1) item having two(2) taxes.
-      var tax2 = Tax(code: 'tax2', unitValue: 5, affectTax: true);
+      var tax2 = Tax(code: 'tax2', unitValue: 5, affectNextTaxSubtotal: true);
       item = Item(
         code: 'item1',
         quantity: 2,
@@ -58,7 +58,7 @@ void main() {
       expect(sale.taxOf('tax1'), 2);
 
       // With one(1) item having two(2) taxes.
-      var tax2 = Tax(code: 'tax2', unitValue: 5, affectTax: true);
+      var tax2 = Tax(code: 'tax2', unitValue: 5, affectNextTaxSubtotal: true);
       item = Item(
         code: 'item1',
         quantity: 2,
@@ -92,12 +92,12 @@ void main() {
       // With one(1) item having one(1) tax affecting total value.
       var tax = Tax(code: 'tax1', unitValue: 10);
       item = Item(code: 'item1', quantity: 2, unitPrice: 10, taxes: [tax]);
-      var discount = Discount(amount: 1, affectTax: false);
+      var discount = Discount(amount: 1, affectSubtotalBeforeTaxes: false);
       sale = Sale(items: [item], discount: discount);
       expect(sale.discountAmount, closeTo(0.909, 0.01));
 
       // With one(1) item having two(2) taxes affecting total value.
-      var tax2 = Tax(code: 'tax2', unitValue: 5, affectTax: true);
+      var tax2 = Tax(code: 'tax2', unitValue: 5, affectNextTaxSubtotal: true);
       item = Item(
         code: 'item1',
         quantity: 2,

@@ -6,7 +6,7 @@ void main() {
 
 void ecuadorSriExample() {
   // ICE tax with 15% (ICE taxes always affect VAT taxes).
-  final ice = Tax(code: 'iceX', unitValue: 15, affectTax: true);
+  final ice = Tax(code: 'iceX', unitValue: 15, affectNextTaxSubtotal: true);
   // VAT tax with 13%.
   final vat = Tax(code: 'IVA13', unitValue: 13);
   // Some item (product or service).
