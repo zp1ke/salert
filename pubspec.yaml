@@ -1,6 +1,6 @@
 name: salert
 description: Library for sales calculations.
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/h4j4x/salert
 
 environment:
