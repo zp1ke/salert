@@ -57,6 +57,10 @@ class Sale implements Sellable {
     return subtotal + tax + tip;
   }
 
+  List<Item> get itemsWithSaleDiscount {
+    return _items;
+  }
+
   List<Item> get _items {
     if (discount == null) {
       return items;
