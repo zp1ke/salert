@@ -68,7 +68,7 @@ class Sale implements Sellable {
     final list = <Item>[];
     var theDiscount = _discount;
     for (final item in items) {
-      if (theDiscount == null) {
+      if (theDiscount == null || theDiscount.amount == 0) {
         list.add(item);
         continue;
       }

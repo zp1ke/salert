@@ -70,7 +70,7 @@ void main() {
       expect(sale.taxOf('tax1'), 2.1);
       expect(sale.taxOf('tax2'), 1);
 
-      // With two(2) items having two(2) taxes.
+      // With two(2) items having two(2) taxes each.
       var item2 = Item(
         code: 'item2',
         quantity: 1,
@@ -89,7 +89,7 @@ void main() {
       var sale = Sale(items: [item]);
       expect(sale.discountAmount, 0);
 
-      // With one(1) item having one(1) tax affecting total value.
+      // With one(1) item having one(1) tax each affecting total value.
       var tax = Tax(code: 'tax1', unitValue: 10);
       item = Item(code: 'item1', quantity: 2, unitPrice: 10, taxes: [tax]);
       var discount = Discount(amount: 1, affectSubtotalBeforeTaxes: false);
@@ -107,7 +107,7 @@ void main() {
       sale = Sale(items: [item], discount: discount);
       expect(sale.discountAmount, closeTo(0.8658, 0.01));
 
-      // With two(2) items having two(2) taxes affecting total value.
+      // With two(2) items having two(2) taxes each affecting total value.
       var item2 = Item(
         code: 'item2',
         quantity: 1,
@@ -127,6 +127,71 @@ void main() {
       );
       sale = Sale(items: [item3], discount: discount);
       expect(sale.discountAmount, closeTo(1.909, 0.01));
+    });
+
+    test('Overall calculations', () {
+      // With two(2) items having one(1) tax each.
+      var tax15 = Tax(
+        code: 'tax15',
+        unitValue: 15,
+        affectNextTaxSubtotal: false,
+      );
+      var itemA = Item(
+        code: 'itemA',
+        quantity: 1,
+        unitPrice: 11,
+        taxes: [tax15],
+        discount: Discount(amount: 2),
+      );
+      var itemB = Item(
+        code: 'itemB',
+        quantity: 1,
+        unitPrice: 12,
+        taxes: [tax15],
+        discount: Discount(amount: 1),
+      );
+      // No discount
+      var sale = Sale(items: [itemA, itemB]);
+      expect(sale.discountAmount, 3);
+      expect(sale.subtotal, 20);
+      expect(sale.tax, 3);
+      expect(sale.total, 23);
+      // Still no discount
+      sale = Sale(
+        items: [itemA, itemB],
+        discount: Discount(amount: 0),
+      );
+      expect(sale.discountAmount, 3);
+      expect(sale.subtotal, 20);
+      expect(sale.tax, 3);
+      expect(sale.total, 23);
+      // Again no discount
+      sale = Sale(
+        items: [itemA, itemB],
+        discount: Discount(amount: 0, affectSubtotalBeforeTaxes: false),
+      );
+      expect(sale.discountAmount, 3);
+      expect(sale.subtotal, 20);
+      expect(sale.tax, 3);
+      expect(sale.total, 23);
+      // With subtotal discount
+      sale = Sale(
+        items: [itemA, itemB],
+        discount: Discount(amount: 1, affectSubtotalBeforeTaxes: true),
+      );
+      expect(sale.discountAmount, 4);
+      expect(sale.subtotal, 19);
+      expect(sale.tax, closeTo(2.85, 0.01));
+      expect(sale.total, closeTo(21.85, 0.01));
+      // With total discount
+      sale = Sale(
+        items: [itemA, itemB],
+        discount: Discount(amount: 1, affectSubtotalBeforeTaxes: false),
+      );
+      expect(sale.discountAmount, closeTo(3.87, 0.01));
+      expect(sale.subtotal, closeTo(19.13, 0.01));
+      expect(sale.tax, closeTo(2.87, 0.01));
+      expect(sale.total, closeTo(22, 0.01));
     });
   });
 }
