@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Tax {
   final String code;
   final double unitValue;
@@ -31,7 +33,7 @@ class Tax {
     if (isPercentage) {
       return total / (1 + unitValue);
     }
-    return total - unitValue;
+    return max(total - unitValue, 0);
   }
 
   static Comparator<Tax> get comparator => (Tax tax1, Tax tax2) {

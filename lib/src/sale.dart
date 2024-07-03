@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'discount.dart';
 import 'item.dart';
 import 'pair.dart';
@@ -89,7 +91,7 @@ class Sale implements Sellable {
       final baseTotal = baseSubtotal + baseTax + tip;
       var discountValue = discount!.discountOf(baseTotal);
       final discountedSubtotal = _inverseSubtotalOf(baseTotal - discountValue);
-      discountValue = baseSubtotal - discountedSubtotal;
+      discountValue = max(baseSubtotal - discountedSubtotal, 0);
       return Discount(amount: discountValue);
     }
     return discount;

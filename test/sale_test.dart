@@ -192,6 +192,22 @@ void main() {
       expect(sale.subtotal, closeTo(19.13, 0.01));
       expect(sale.tax, closeTo(2.87, 0.01));
       expect(sale.total, closeTo(22, 0.01));
+      // With zero total discount
+      final itemC = Item(
+        code: 'itemC',
+        quantity: 1,
+        unitPrice: 6.956522,
+        taxes: [tax15],
+        discount: Discount(amount: 0),
+      );
+      sale = Sale(
+        items: [itemC],
+        discount: Discount(amount: 0, affectSubtotalBeforeTaxes: false),
+      );
+      expect(sale.discountAmount, 0);
+      expect(sale.subtotal, closeTo(6.96, 0.01));
+      expect(sale.tax, closeTo(1.04, 0.01));
+      expect(sale.total, closeTo(8, 0.01));
     });
   });
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'discount.dart';
 import 'sellable.dart';
 import 'tax.dart';
@@ -92,7 +94,7 @@ class Item implements Sellable {
   @override
   double get discountAmount {
     var baseSubtotal = _subtotalOf(unitPrice);
-    return baseSubtotal - subtotal;
+    return max(baseSubtotal - subtotal, 0);
   }
 
   /// Calculates total amount.
