@@ -22,10 +22,15 @@ class Discount {
   })  : assert(amount >= 0, 'Amount must be zero or positive.'),
         amount = !isPercentage || amount <= 1 ? amount : amount / 100;
 
+  bool get affectsTotal => !affectSubtotalBeforeTaxes && amount > 0;
+
   static Discount empty() => Discount(amount: .0);
 
   /// Calculates discount amount for given [value].
   double discountOf(double value) {
+    if (amount == 0) {
+      return 0;
+    }
     if (isPercentage) {
       return value * amount;
     }

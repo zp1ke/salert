@@ -36,7 +36,9 @@ class Item implements Sellable {
   /// Calculates subtotal amount including [discount] (before taxes).
   @override
   double get subtotal {
-    if (discount == null || discount!.affectSubtotalBeforeTaxes) {
+    if (discount == null ||
+        discount!.affectSubtotalBeforeTaxes ||
+        discount!.amount == 0) {
       return _subtotalOf(unitPrice, discount);
     }
     final base = _subtotalOf(unitPrice);
