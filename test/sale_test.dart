@@ -131,23 +131,30 @@ void main() {
 
     test('Overall calculations', () {
       // With two(2) items having one(1) tax each.
-      var tax15 = Tax(
-        code: 'tax15',
-        unitValue: 15,
-        affectNextTaxSubtotal: false,
-      );
       var itemA = Item(
         code: 'itemA',
         quantity: 1,
         unitPrice: 11,
-        taxes: [tax15],
+        taxes: [
+          Tax(
+            code: 'tax15',
+            unitValue: 15,
+            affectNextTaxSubtotal: false,
+          ),
+        ],
         discount: Discount(amount: 2),
       );
       var itemB = Item(
         code: 'itemB',
         quantity: 1,
         unitPrice: 12,
-        taxes: [tax15],
+        taxes: [
+          Tax(
+            code: 'tax15',
+            unitValue: 15,
+            affectNextTaxSubtotal: false,
+          ),
+        ],
         discount: Discount(amount: 1),
       );
       // No discount
@@ -197,7 +204,13 @@ void main() {
         code: 'itemC',
         quantity: 1,
         unitPrice: 6.956522,
-        taxes: [tax15],
+        taxes: [
+          Tax(
+            code: 'tax15',
+            unitValue: 15,
+            affectNextTaxSubtotal: false,
+          ),
+        ],
         discount: Discount(amount: 0),
       );
       sale = Sale(

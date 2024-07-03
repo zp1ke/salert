@@ -1,5 +1,5 @@
 name: salert
-description: Library for sales calculations.
+description: Library for efficient sales amounts calculations, including discounts, subtotal before taxes, taxes and total amounts.
 version: 0.0.5
 repository: https://github.com/h4j4x/salert
 

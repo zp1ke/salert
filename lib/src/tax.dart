@@ -36,6 +36,13 @@ class Tax {
     return max(total - unitValue, 0);
   }
 
+  @override
+  bool operator ==(Object other) =>
+      other is Tax && other.runtimeType == runtimeType && other.code == code;
+
+  @override
+  int get hashCode => code.hashCode;
+
   static Comparator<Tax> get comparator => (Tax tax1, Tax tax2) {
         final byPriority = tax1.priority.compareTo(tax2.priority);
         if (byPriority != 0) {
