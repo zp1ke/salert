@@ -92,6 +92,14 @@ class Item implements Sellable {
     return 0;
   }
 
+  /// Calculates tax amount including [discount] for given [taxCodes].
+  @override
+  double taxOfCodes(List<String> taxCodes) {
+    return taxCodes
+        .map((taxCode) => taxOf(taxCode))
+        .reduce((value1, value2) => value1 + value2);
+  }
+
   // Calculates discount amount before taxes.
   @override
   double get discountAmount {

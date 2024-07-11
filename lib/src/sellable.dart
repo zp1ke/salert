@@ -11,6 +11,9 @@ abstract class Sellable {
   /// Calculates tax amount including [discount] for given [taxCode].
   double taxOf(String taxCode);
 
+  /// Calculates tax amount including [discount] for given [taxCodes].
+  double taxOfCodes(List<String> taxCodes);
+
   // Calculates discount amount before taxes.
   double get discountAmount;
 

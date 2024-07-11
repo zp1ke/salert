@@ -20,7 +20,9 @@ class Sale implements Sellable {
   /// Calculates subtotal amount including [discount] (before taxes).
   @override
   double get subtotal {
-    return _items.map((item) => item.subtotal).reduce((s1, s2) => s1 + s2);
+    return _items
+        .map((item) => item.subtotal)
+        .reduce((value1, value2) => value1 + value2);
   }
 
   /// Calculates subtotal amount including [discount] for given [taxCode] (before taxes).
@@ -28,7 +30,7 @@ class Sale implements Sellable {
   double subtotalOf(String taxCode) {
     return _items
         .map((item) => item.subtotalOf(taxCode))
-        .reduce((s1, s2) => s1 + s2);
+        .reduce((value1, value2) => value1 + value2);
   }
 
   /// Calculates tax amount.
@@ -42,7 +44,15 @@ class Sale implements Sellable {
   double taxOf(String taxCode) {
     return _items
         .map((item) => item.taxOf(taxCode))
-        .reduce((s1, s2) => s1 + s2);
+        .reduce((value1, value2) => value1 + value2);
+  }
+
+  /// Calculates tax amount including [discount] for given [taxCodes].
+  @override
+  double taxOfCodes(List<String> taxCodes) {
+    return _items
+        .map((item) => item.taxOfCodes(taxCodes))
+        .reduce((value1, value2) => value1 + value2);
   }
 
   // Calculates discount amount before taxes.
@@ -50,7 +60,7 @@ class Sale implements Sellable {
   double get discountAmount {
     return _items
         .map((item) => item.discountAmount)
-        .reduce((s1, s2) => s1 + s2);
+        .reduce((value1, value2) => value1 + value2);
   }
 
   /// Calculates total amount.
@@ -85,9 +95,12 @@ class Sale implements Sellable {
 
   Discount? get _discount {
     if (discount?.affectsTotal ?? false) {
-      final baseSubtotal =
-          items.map((item) => item.subtotal).reduce((s1, s2) => s1 + s2);
-      final baseTax = items.map((item) => item.tax).reduce((s1, s2) => s1 + s2);
+      final baseSubtotal = items
+          .map((item) => item.subtotal)
+          .reduce((value1, value2) => value1 + value2);
+      final baseTax = items
+          .map((item) => item.tax)
+          .reduce((value1, value2) => value1 + value2);
       final baseTotal = baseSubtotal + baseTax + tip;
       var discountValue = discount!.discountOf(baseTotal);
       final discountedSubtotal = _inverseSubtotalOf(baseTotal - discountValue);

@@ -5,6 +5,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.6]
+
+### Added
+
+- Sellable get tax amount by a group of codes (*taxOfCodes*).
+
 ## [0.0.5]
 
 ### Added
