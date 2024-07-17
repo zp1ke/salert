@@ -93,6 +93,8 @@ class Sale implements Sellable {
     return list;
   }
 
+  double get discountAmountOfSaleAffectingSubtotal => _discount?.amount ?? .0;
+
   Discount? get _discount {
     if (discount?.affectsTotal ?? false) {
       final baseSubtotal = items

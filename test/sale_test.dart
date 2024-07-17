@@ -90,7 +90,7 @@ void main() {
       expect(sale.discountAmount, 0);
 
       // With one(1) item having one(1) tax each affecting total value.
-      var tax = Tax(code: 'tax1', unitValue: 10);
+      final tax = Tax(code: 'tax1', unitValue: 10);
       item = Item(code: 'item1', quantity: 2, unitPrice: 10, taxes: [tax]);
       var discount = Discount(amount: 1, affectSubtotalBeforeTaxes: false);
       sale = Sale(items: [item], discount: discount);
@@ -221,6 +221,28 @@ void main() {
       expect(sale.subtotal, closeTo(6.96, 0.01));
       expect(sale.tax, closeTo(1.04, 0.01));
       expect(sale.total, closeTo(8, 0.01));
+    });
+
+    test('Sale discount calculation', () {
+      // With one(1) item having one(1) tax and discount; affecting total value.
+      final tax = Tax(code: 'tax1', unitValue: 15);
+      final item = Item(
+        code: 'item',
+        quantity: 1,
+        unitPrice: 11,
+        taxes: [tax],
+        discount: Discount(amount: 1),
+      );
+      var discount = Discount(amount: 1.5, affectSubtotalBeforeTaxes: false);
+      var sale = Sale(items: [item], discount: discount);
+      expect(sale.discountAmountOfSaleAffectingSubtotal, closeTo(1.3, 0.01));
+      expect(sale.total, closeTo(10.0, 0.01));
+
+      // With one(1) item having one(1) tax and discount; affecting total value.
+      discount = Discount(amount: 1.3);
+      sale = Sale(items: [item], discount: discount);
+      expect(sale.discountAmountOfSaleAffectingSubtotal, closeTo(1.3, 0.01));
+      expect(sale.total, closeTo(10.0, 0.01));
     });
   });
 }
