@@ -1,6 +1,8 @@
 # Salert
 
 [![Test](https://github.com/h4j4x/salert/actions/workflows/test.yml/badge.svg)](https://github.com/h4j4x/salert/actions/workflows/test.yml)
+[![Pub](https://img.shields.io/pub/v/salert)](https://pub.dev/packages/salert)
+[![License](https://img.shields.io/github/license/zp1ke/salert)](https://github.com/zp1ke/salert/blob/main/LICENSE)
 
 A library for efficient sales amounts calculations, including discounts, subtotal before taxes, taxes and total amounts.
 
