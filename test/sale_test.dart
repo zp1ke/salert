@@ -244,5 +244,13 @@ void main() {
       expect(sale.discountAmountOfSaleAffectingSubtotal, closeTo(1.3, 0.01));
       expect(sale.total, closeTo(10.0, 0.01));
     });
+
+    test('Empty sale calculation', () {
+      var sale = Sale(items: []);
+      expect(sale.subtotal, .0);
+      expect(sale.tax, .0);
+      expect(sale.discountAmount, .0);
+      expect(sale.total, .0);
+    });
   });
 }

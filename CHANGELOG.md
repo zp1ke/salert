@@ -5,6 +5,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.8]
+
+### Fixed
+
+- Using `fold` instead of `reduce` function to avoid error on empty sales.
+
 ## [0.0.7]
 
 ### Added

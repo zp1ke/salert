@@ -97,7 +97,7 @@ class Item implements Sellable {
   double taxOfCodes(List<String> taxCodes) {
     return taxCodes
         .map((taxCode) => taxOf(taxCode))
-        .reduce((value1, value2) => value1 + value2);
+        .fold(.0, (value1, value2) => value1 + value2);
   }
 
   // Calculates discount amount before taxes.
